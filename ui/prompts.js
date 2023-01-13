@@ -3,8 +3,16 @@ const models = [
     type: "list",
     name: "model",
     message: "Choose a Model:",
-    choices: ["babbage", "ada", "davinci", "curie"]
+    choices: ["davinci", "curie", "babbage", "ada"]
   }
 ];
 
-export { models };
+const exchange = [
+  {
+    type: "input",
+    name: "prompt",
+    prefix: ">",
+    message: "Input a prompt to send to your engine:"
+  }
+];
+export { models, exchange };

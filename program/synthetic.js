@@ -1,30 +1,30 @@
 import { Command } from "commander";
-
+import { TitleDecor } from "../lib/decor.js";
 import { handlers } from "../controllers/index.js";
 
-const [handleListModels, handleSetModel, handleSetKey] = handlers;
+const [handleConfiguration, handleEngineDescribe, handleExchange] = handlers;
 
-const PROGRAM_NAME = "SYNTHETIC";
+const PROGRAM_NAME = "SYNTH-BRAIN";
 
-const program = new Command()
-  .name(PROGRAM_NAME.toLowerCase())
-  .version("1.0.0")
-  .description(PROGRAM_NAME);
+const program = new Command().name("synth").version("1.0.0").description(`
+  ${TitleDecor(PROGRAM_NAME)}\n  
+  Subdue the bully in your braincage.
+`);
 
 const Cmnd = (cmndName, description, action) => (program) =>
   program.command(cmndName).description(description).action(action);
 
-const [ListModels, SetModel, SetKey] = [
+[
+  Cmnd("configure", "Encrypt and set your API Key", handleConfiguration),
   Cmnd(
-    "get-models",
-    "Retrieve a list of available ai models",
-    handleListModels
+    "describe",
+    "Retrieve information about available engines",
+    handleEngineDescribe
   ),
-  Cmnd("set-model", "Choose from a list of available models", handleSetModel),
   Cmnd(
-    "set-key <api_key>",
-    "Set your api key with bcrypt encryption",
-    handleSetKey
+    "spinup",
+    "Initiate an asynchronous prompt exchange with the chosen engine",
+    handleExchange
   )
 ].map((fn) => fn(program));
 

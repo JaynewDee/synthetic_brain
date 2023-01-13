@@ -1,9 +1,9 @@
-import { ListModelsHandler, SetModelHandler } from "./models.js";
-import { SetKeyHandler } from "./auth.js";
-import { AuthHandler } from "../lib/files.js";
+import { DescribeEngine, ExchangeHandler } from "./engines.js";
+import { ConfigHandler } from "./auth.js";
+import { AIHandler, Config } from "../lib/index.js";
 
 export const handlers = [
-  ListModelsHandler,
-  SetModelHandler,
-  SetKeyHandler(AuthHandler)
+  ConfigHandler(Config),
+  DescribeEngine(AIHandler),
+  ExchangeHandler(AIHandler)
 ];
